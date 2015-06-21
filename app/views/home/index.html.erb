@@ -9,11 +9,12 @@
           <p><%= image_tag(media.images.low_resolution.url) %></p>
         </center>
       <% end %>
+      <p><%= media.caption.text if media.caption.present? %></p>
     <% end %>
     <h2>content</h2>
   </div>
   <div data-role="footer">
     <h4>つくマイル all rights reverved.</h4>
-    <h4>開発者 :@yaginuuu</h4>
+    <h4>開発者: @yaginuuu</h4>
   </div>
 </div>
