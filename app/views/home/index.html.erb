@@ -6,7 +6,7 @@
     <% @medias.each do |media| %>
       <%= link_to media.link, :target => "_blank" do %>
         <center>
-          <p><%= image_tag(media.images.low_resolution.url) %></p>
+          <p><%= image_tag media.images.low_resolution.url %></p>
         </center>
       <% end %>
       <p><%= media.caption.text if media.caption.present? %></p>
