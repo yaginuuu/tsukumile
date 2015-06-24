@@ -4,17 +4,22 @@
   </div>                    
   <div role="main" class="ui-content">
     <% @medias.each do |media| %>
-      <%= link_to media.link, :target => "_blank" do %>
-        <center>
-          <p><%= image_tag media.images.low_resolution.url, width:310, height:310 %></p>
-        </center>
-      <% end %>
+      <div class='fav' data-img-id=<%=media.link%>>
+        <%= judge_fav(media.link) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
+      </div>
+      <center>
+        <%= link_to media.link, :target => "_blank" do %>
+          <p><%= image_tag media.images.low_resolution.url, width:290, height:290 %></p>
+        <% end %>
+      </center>
       <p><%= media.caption.text if media.caption.present? %></p>
     <% end %>
-    <h2>content</h2>
   </div>
   <div data-role="footer">
     <h4>つくマイル all rights reverved.</h4>
     <h4>開発者: @yaginuuu</h4>
   </div>
 </div>
+<script>
+setFavorite();
+</script>
