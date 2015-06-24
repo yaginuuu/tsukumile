@@ -1,18 +1,20 @@
 <div data-role="page">
-  <div data-role="header">
-    <h1>つくマイル</h1>
-  </div>                    
+    <div data-role="header">
+      <h1>つくマイル</h1>
+    </div>
   <div role="main" class="ui-content">
     <% @medias.each do |media| %>
-      <div class='fav' data-img-id=<%=media.link%>>
-        <%= judge_fav(media.link) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
+      <div class='img_block'>
+        <div class='fav' data-img-id=<%=media.link%>>
+          <%= judge_fav(media.link) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
+        </div>
+        <center>
+          <%= link_to media.link, :target => "_blank" do %>
+            <p><%= image_tag media.images.low_resolution.url, width:290, height:290 %></p>
+          <% end %>
+        </center>
+        <p><%= media.caption.text if media.caption.present? %></p>
       </div>
-      <center>
-        <%= link_to media.link, :target => "_blank" do %>
-          <p><%= image_tag media.images.low_resolution.url, width:290, height:290 %></p>
-        <% end %>
-      </center>
-      <p><%= media.caption.text if media.caption.present? %></p>
     <% end %>
   </div>
   <div data-role="footer">
@@ -21,5 +23,5 @@
   </div>
 </div>
 <script>
-setFavorite();
+  setFavorite();
 </script>

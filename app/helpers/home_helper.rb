@@ -1,6 +1,6 @@
 module HomeHelper
   def judge_fav(img_url)
-    img_url.delete!("https://instagram.com/p/")
+    img_id = img_url.delete("https://instagram.com/p/")
     fav_ary = []
     if cookies[:fav].present?
       if /&/ =~ cookies[:fav]
@@ -9,6 +9,6 @@ module HomeHelper
         fav_ary << cookies[:fav]
       end
     end
-    fav_ary.find{ |elem| elem == img_url} ? true : false
+    fav_ary.find{ |elem| elem == img_id} ? true : false
   end
 end

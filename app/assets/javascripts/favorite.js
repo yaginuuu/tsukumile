@@ -12,19 +12,6 @@ var setFavorite = function(){
         this.attr('src', "/images/fav.gif");
       }
     });
-
-    //$.get('home/favorite', {
-    //  img_id: $(this).data('img-id'),
-    //  context: $(this)
-    //  },
-    //  function(data){
-    //    alert($(this));
-    //    if(data.star == true){
-    //      this.attr('src', "nofav.gif");
-    //    }else{
-    //      this.attr('src', "fav.gif");
-    //    }
-    //});
   });
 };
 

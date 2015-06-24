@@ -25,7 +25,6 @@ class HomeController < ApplicationController
       fav_ary.push(params[:img_id])
     end
     cookies[:fav] = fav_ary.uniq
-    result[:fav] = fav_ary.uniq
     render :json => result
   end
 
