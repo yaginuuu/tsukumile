@@ -7,11 +7,6 @@ class HomeController < ApplicationController
 
   def tweet
     @client = Twitter::REST::Client.new do |config|
-      #config.consumer_key        = "hDo18TQMdAqVUyikDSwZQvm4X"
-      #config.consumer_secret     = "5bsjGn9D7quZRzcC0CCDEdAfeVzHj6QThXLGVAsnrXM3FqWESC"
-      #config.access_token        = "361312822-VQNiGaCA0wjNBEhDL2ohRFFzSwPdAN9TCIip2SIi"
-      #config.access_token_secret = "tQxHOxFvKqxyQc8Ik59O9TsgdXxnbraOdcYhcjRo3ZIGE"
-
       config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
       config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
       config.access_token        = ENV["TWITTER_ACCESS_TOKEN"]
