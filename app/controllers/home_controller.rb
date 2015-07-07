@@ -1,21 +1,33 @@
 class HomeController < ApplicationController
   def index
     location_id = 284860
-    @medias = Instagram.tag_recent_media(URI.encode("笑顔")) &&
-              Instagram.location_recent_media(location_id) ||
-              Instagram.tag_recent_media(URI.encode("元気")) &&
+    @medias = Instagram.tag_recent_media(URI.encode("笑顔"), {count: 10}) &&
               Instagram.location_recent_media(location_id)
   end
 
-  def favorite
+  def tweet
+    @client = Twitter::REST::Client.new do |config|
+      #config.consumer_key        = "hDo18TQMdAqVUyikDSwZQvm4X"
+      #config.consumer_secret     = "5bsjGn9D7quZRzcC0CCDEdAfeVzHj6QThXLGVAsnrXM3FqWESC"
+      #config.access_token        = "361312822-VQNiGaCA0wjNBEhDL2ohRFFzSwPdAN9TCIip2SIi"
+      #config.access_token_secret = "tQxHOxFvKqxyQc8Ik59O9TsgdXxnbraOdcYhcjRo3ZIGE"
+
+      config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+      config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+      config.access_token        = ENV["TWITTER_ACCESS_TOKEN"]
+      config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
+    end
+  end
+
+  def favorite_instagram
     result = {}
     fav_ary = []
     params[:img_id].delete!("https://instagram.com/p/")
-    if cookies[:fav].present?
-      if /&/ =~ cookies[:fav]
-        fav_ary = cookies[:fav].split('&')
+    if cookies[:instagram_fav].present?
+      if /&/ =~ cookies[:instagram_fav]
+        fav_ary = cookies[:instagram_fav].split('&')
       else
-        fav_ary << cookies[:fav]
+        fav_ary << cookies[:instagram_fav]
       end
     end
     result[:star] = fav_ary.find{ |elem| elem == params[:img_id]} ? true : false
@@ -24,11 +36,27 @@ class HomeController < ApplicationController
     else
       fav_ary.push(params[:img_id])
     end
-    cookies[:fav] = fav_ary.uniq
+    cookies[:instagram_fav] = fav_ary.uniq
     render :json => result
   end
 
-  def unset_fav
-    cookies[:favorite] = {:value => false}
+  def favorite_twitter
+    result = {}
+    fav_ary = []
+    if cookies[:twitter_fav].present?
+      if /&/ =~ cookies[:twitter_fav]
+        fav_ary = cookies[:twitter_fav].split('&')
+      else
+        fav_ary << cookies[:twitter_fav]
+      end
+    end
+    result[:star] = fav_ary.find{ |elem| elem == params[:id]} ? true : false
+    if result[:star]
+      fav_ary.delete(params[:id])
+    else
+      fav_ary.push(params[:id])
+    end
+    cookies[:twitter_fav] = fav_ary.uniq
+    render :json => result
   end
 end

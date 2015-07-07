@@ -1,27 +1,18 @@
-<div data-role="page">
-    <div data-role="header">
-      <h1>つくマイル</h1>
-    </div>
-  <div role="main" class="ui-content">
-    <% @medias.each do |media| %>
-      <div class='img_block'>
-        <div class='fav' data-img-id=<%=media.link%>>
-          <%= judge_fav(media.link) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
-        </div>
-        <center>
-          <%= link_to media.link, :target => "_blank" do %>
-            <p><%= image_tag media.images.low_resolution.url, width:290, height:290 %></p>
-          <% end %>
-        </center>
-        <p><%= media.caption.text if media.caption.present? %></p>
+<div role="main" class="ui-content">
+  <% @medias.each do |media| %>
+    <div class='img_block'>
+      <div class='fav' data-img-id=<%=media.link%>>
+        <%= judge_fav_instagram(media.link) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
       </div>
-    <% end %>
-  </div>
-  <div data-role="footer">
-    <h4>つくマイル all rights reverved.</h4>
-    <h4>開発者: @yaginuuu</h4>
-  </div>
+      <center>
+        <%= link_to media.link, :target => "_blank" do %>
+          <p><%= image_tag media.images.low_resolution.url, width:290, height:290 %></p>
+        <% end %>
+      </center>
+      <p><%= media.caption.text if media.caption.present? %></p>
+    </div>
+  <% end %>
 </div>
 <script>
-  setFavorite();
+  setInstagramFavorite();
 </script>

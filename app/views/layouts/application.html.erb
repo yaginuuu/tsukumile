@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tsukumile</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5,maximum-scale=1.0,user-scalable=no">
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Tsukumile</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header" data-position="fixed" data-tap-toggle="false" data-back-btn-theme="a">
+        <a href="/home/index" class="ui-btn ui-btn-a ui-btn-left">いんすた</a>
+        <h1>つくマイル</h1>
+        <a href="/home/tweet" class="ui-btn ui-btn-a ui-btn-right">ついったー</a>
+      </div>
 
-<%= yield %>
-
-</body>
+      <%= yield %>
+      <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <h4>つくマイル: @yaginuuu</h4>
+      </div>
+    </div>
+  </body>
 </html>

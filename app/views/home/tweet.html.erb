@@ -1,0 +1,21 @@
+<div role="main" class="ui-content">
+  <% @client.search("つくば", :locale => "ja", :result_type => "recent", :include_entity => true).take(100).map do |tweet| %>
+    <% if tweet.media? then %>
+      <% tweet.media.each do |value| %>
+        <div class='img_block'>
+          <div class='fav' data-id=<%=tweet.id%> data-name=<%=tweet.user.screen_name%>>
+            <%= judge_fav_twitter(tweet.id) ? (image_tag 'fav.gif') : (image_tag 'nofav.gif') %>
+          </div>
+          <center>
+            <p><%= image_tag value.media_uri, width:290, height:290 %></p>
+            <%= "@#{tweet.user.screen_name}" %>
+            <%= tweet.text %>
+          </center>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<script>
+  setTwitterFavorite();
+</script>

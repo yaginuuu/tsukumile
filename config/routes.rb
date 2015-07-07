@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'home/index'
-  get 'home/favorite' => 'home#favorite'
+  get 'home/tweet' => 'home#tweet'
+  get 'home/favorite_instagram' => 'home#favorite_instagram'
+  get 'home/favorite_twitter' => 'home#favorite_twitter'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
